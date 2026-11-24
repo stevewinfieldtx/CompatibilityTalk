@@ -10,6 +10,7 @@ import {
   Hexagon,
   Heart,
   Brain,
+  Compass,
   Check,
 } from 'lucide-react-native';
 import Animated, {
@@ -28,6 +29,7 @@ const iconMap: Record<string, React.ComponentType<{ size: number; color: string 
   Hexagon,
   Heart,
   Brain,
+  Compass,
 };
 
 const AnimatedPressable = Animated.createAnimatedComponent(Pressable);

@@ -10,6 +10,7 @@ import {
   Hexagon,
   Heart,
   Brain,
+  Compass,
   MessageCircle,
   Sparkles,
   Users,
@@ -29,6 +30,7 @@ const iconMap: Record<string, React.ComponentType<{ size: number; color: string 
   Hexagon,
   Heart,
   Brain,
+  Compass,
 };
 
 function DetailSection({

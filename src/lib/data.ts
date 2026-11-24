@@ -570,6 +570,126 @@ export const frameworks: Framework[] = [
         challenges: ['Sensitive', 'Conflict-averse', 'Easily bored', 'Unfocused', 'Poor long-term planning']
       }
     ]
+  },
+  {
+    id: 'bazi',
+    name: 'BaZi',
+    icon: 'Compass',
+    color: '#10b981',
+    gradient: ['#047857', '#065f46'],
+    description: 'BaZi, also called the Four Pillars of Destiny, reads the year, month, day, and hour of your birth. This guide uses your Day Master, the heavenly stem of your birth day, which describes your core nature through the five elements and yin and yang. A free BaZi calculator will show you yours.',
+    types: [
+      {
+        id: 'jia',
+        name: 'Yang Wood (Jia)',
+        symbol: '甲',
+        description: 'Upright, ambitious, and principled. Like a tall tree, Yang Wood grows steadily toward its goals and offers shelter to others.',
+        communicationStyle: 'Direct and honest. Yang Wood says what it believes and expects the same in return. They prefer clear plans and meaningful goals over small talk, and can be slow to bend on a point.',
+        strengths: ['Principled', 'Ambitious', 'Confident', 'Protective', 'Honest'],
+        challenges: ['Stubborn', 'Inflexible', 'Proud', 'Overly serious', 'Hard to persuade'],
+        partnershipInsights: 'As a partner, Yang Wood is loyal, protective, and committed to building a future together. They lead by example and want a relationship with shared direction and integrity. They make steady, dependable partners who grow alongside the people they love.',
+        loverInsights: 'As a lover, Yang Wood is warm, sincere, and quietly intense. They show desire through devotion and attention rather than flash, and they value trust before vulnerability. They make faithful, generous lovers who want intimacy that feels honest and lasting.'
+      },
+      {
+        id: 'yi',
+        name: 'Yin Wood (Yi)',
+        symbol: '乙',
+        description: 'Graceful, flexible, and resourceful. Like a vine or flower, Yin Wood bends without breaking and finds a way around any obstacle.',
+        communicationStyle: 'Gentle and diplomatic. Yin Wood reads the room, softens hard messages, and looks for common ground. They may hint at a hard truth instead of saying it outright.',
+        strengths: ['Graceful', 'Adaptable', 'Charming', 'Diplomatic', 'Resilient'],
+        challenges: ['Indecisive', 'Clingy', 'Conflict-avoidant', 'Easily influenced', 'Anxious'],
+        partnershipInsights: 'As a partner, Yin Wood is attentive, supportive, and good at keeping the peace. They adapt to their partner\'s needs and make home feel warm and welcoming. They make caring, cooperative partners who thrive when they feel secure and appreciated.',
+        loverInsights: 'As a lover, Yin Wood is tender, romantic, and sensitive to mood. They enjoy gentle affection, thoughtful gestures, and a relaxed pace that builds connection. They make attentive, affectionate lovers who respond beautifully to reassurance.'
+      },
+      {
+        id: 'bing',
+        name: 'Yang Fire (Bing)',
+        symbol: '丙',
+        description: 'Radiant, generous, and optimistic. Like the sun, Yang Fire lights up a room and wants everyone to feel included.',
+        communicationStyle: 'Warm and expressive. Yang Fire speaks openly, tells stories, and lifts the mood. They are honest about their feelings and may talk before thinking things through.',
+        strengths: ['Radiant', 'Generous', 'Confident', 'Optimistic', 'Inspiring'],
+        challenges: ['Impulsive', 'Impatient', 'Attention-seeking', 'Prone to burnout', 'Careless with details'],
+        partnershipInsights: 'As a partner, Yang Fire is loving, loyal, and openly affectionate. They celebrate their partner in public and bring joy to ordinary days. They make enthusiastic, generous partners who need appreciation in return.',
+        loverInsights: 'As a lover, Yang Fire is passionate, playful, and confident. They enjoy visible desire, laughter, and spontaneous romance. They make warm, energetic lovers who want their partner to feel wanted and adored.'
+      },
+      {
+        id: 'ding',
+        name: 'Yin Fire (Ding)',
+        symbol: '丁',
+        description: 'Warm, perceptive, and refined. Like a candle flame, Yin Fire gives focused light and comfort to those close by.',
+        communicationStyle: 'Intimate and insightful. Yin Fire prefers one-on-one conversation and notices what others miss. They speak thoughtfully, and may go quiet when hurt rather than say so.',
+        strengths: ['Warm', 'Perceptive', 'Intuitive', 'Focused', 'Refined'],
+        challenges: ['Moody', 'Brooding', 'Sensitive to criticism', 'Possessive', 'Slow to forgive'],
+        partnershipInsights: 'As a partner, Yin Fire is devoted, attentive, and emotionally aware. They notice small needs and respond with care, and they invest deeply in the few people they choose. They make loyal, caring partners who want closeness and trust.',
+        loverInsights: 'As a lover, Yin Fire is sensual, intuitive, and intense. They love private, focused intimacy and a partner who is fully present. They make deeply attuned lovers who turn quiet moments into something memorable.'
+      },
+      {
+        id: 'wu',
+        name: 'Yang Earth (Wu)',
+        symbol: '戊',
+        description: 'Steady, trustworthy, and strong. Like a mountain, Yang Earth is a reliable presence that others lean on.',
+        communicationStyle: 'Calm and measured. Yang Earth listens before speaking and keeps promises. They prefer practical talk and can be slow to share feelings or change their mind.',
+        strengths: ['Steady', 'Reliable', 'Capable', 'Protective', 'Patient'],
+        challenges: ['Stubborn', 'Reserved', 'Slow to change', 'Overly cautious', 'Dismissive of feelings'],
+        partnershipInsights: 'As a partner, Yang Earth is solid, protective, and committed for the long haul. They provide security and keep their word, and they show love through steady action. They make dependable partners who create a safe home base.',
+        loverInsights: 'As a lover, Yang Earth is warm, grounded, and steady. They take time to open up, but once trust is built they are affectionate and generous. They make patient, devoted lovers who value comfort and reliability.'
+      },
+      {
+        id: 'ji',
+        name: 'Yin Earth (Ji)',
+        symbol: '己',
+        description: 'Nurturing, practical, and humble. Like fertile garden soil, Yin Earth helps people and projects grow.',
+        communicationStyle: 'Considerate and supportive. Yin Earth listens closely and offers practical help. They may downplay their own needs and need encouragement to speak up.',
+        strengths: ['Nurturing', 'Practical', 'Dependable', 'Adaptable', 'Humble'],
+        challenges: ['Anxious', 'Self-doubting', 'Overgiving', 'Indirect', 'Overthinking'],
+        partnershipInsights: 'As a partner, Yin Earth is caring, attentive, and quietly devoted. They look after the details of shared life and make their partner feel looked after. They make supportive partners who flourish when their effort is noticed.',
+        loverInsights: 'As a lover, Yin Earth is gentle, affectionate, and responsive. They show desire through care and closeness, and they relax most when they feel safe and appreciated. They make tender, giving lovers who value emotional security.'
+      },
+      {
+        id: 'geng',
+        name: 'Yang Metal (Geng)',
+        symbol: '庚',
+        description: 'Decisive, courageous, and fair-minded. Like raw steel or a sword, Yang Metal cuts through confusion and defends what is right.',
+        communicationStyle: 'Blunt and efficient. Yang Metal gets to the point and values loyalty and clear commitments. They can sound harsh without meaning to, and respect people who answer plainly.',
+        strengths: ['Decisive', 'Courageous', 'Confident', 'Loyal', 'Fair'],
+        challenges: ['Blunt', 'Rigid', 'Competitive', 'Quick to anger', 'Guarded'],
+        partnershipInsights: 'As a partner, Yang Metal is loyal, protective, and direct. They defend their people and keep commitments, and they want honesty above all. They make strong, faithful partners who show love through action and loyalty.',
+        loverInsights: 'As a lover, Yang Metal is confident, intense, and straightforward. They say what they want and appreciate a partner who does the same. They make bold, committed lovers who bring strength and focus to intimacy.'
+      },
+      {
+        id: 'xin',
+        name: 'Yin Metal (Xin)',
+        symbol: '辛',
+        description: 'Refined, perceptive, and discerning. Like a polished jewel, Yin Metal values quality, beauty, and high standards.',
+        communicationStyle: 'Articulate and precise. Yin Metal chooses words carefully and notices flaws quickly. They appreciate respect and can come across as critical or sharp-tongued.',
+        strengths: ['Refined', 'Articulate', 'Elegant', 'Perceptive', 'Discerning'],
+        challenges: ['Critical', 'Perfectionistic', 'Thin-skinned', 'Vain', 'Hard to please'],
+        partnershipInsights: 'As a partner, Yin Metal is loyal, thoughtful, and attentive to the little things. They care about making the relationship beautiful and meaningful, and they hold high standards for it. They make devoted, elegant partners who need to feel valued and respected.',
+        loverInsights: 'As a lover, Yin Metal is sensual, selective, and romantic. They love atmosphere, detail, and a partner who makes an effort. They make passionate, discerning lovers who reward care and attention.'
+      },
+      {
+        id: 'ren',
+        name: 'Yang Water (Ren)',
+        symbol: '壬',
+        description: 'Free-flowing, intelligent, and adventurous. Like a great river or ocean, Yang Water is expansive and always moving.',
+        communicationStyle: 'Open-minded and wide-ranging. Yang Water enjoys big ideas, travel, and lively debate. They adapt quickly to new topics but may avoid settling on one point.',
+        strengths: ['Intelligent', 'Adventurous', 'Free-spirited', 'Adaptable', 'Resourceful'],
+        challenges: ['Restless', 'Scattered', 'Commitment-shy', 'Overwhelming', 'Emotionally distant'],
+        partnershipInsights: 'As a partner, Yang Water is generous, curious, and fun. They bring variety and big-picture thinking and give their partner plenty of room to be themselves. They make exciting, easygoing partners who need freedom to feel committed.',
+        loverInsights: 'As a lover, Yang Water is adventurous, fluid, and open to new experiences. They enjoy exploring together and keep intimacy fresh. They make imaginative, passionate lovers who thrive on variety and trust.'
+      },
+      {
+        id: 'gui',
+        name: 'Yin Water (Gui)',
+        symbol: '癸',
+        description: 'Intuitive, empathic, and imaginative. Like rain or morning mist, Yin Water works quietly and sees what lies beneath the surface.',
+        communicationStyle: 'Soft-spoken and perceptive. Yin Water picks up on unspoken feelings and prefers quiet, private conversation. They may keep their thoughts to themselves until they feel safe.',
+        strengths: ['Intuitive', 'Empathic', 'Imaginative', 'Gentle', 'Wise'],
+        challenges: ['Secretive', 'Moody', 'Oversensitive', 'Withdrawn', 'Easily drained'],
+        partnershipInsights: 'As a partner, Yin Water is deeply caring, intuitive, and emotionally attuned. They sense their partner\'s mood and offer quiet comfort and insight. They make loyal, empathic partners who need gentleness and patience.',
+        loverInsights: 'As a lover, Yin Water is dreamy, sensitive, and deeply responsive. They love emotional closeness that flows into physical connection and need a safe, unhurried setting. They make intuitive, romantic lovers who create deep and tender intimacy.'
+      }
+    ]
   }
 ];
 

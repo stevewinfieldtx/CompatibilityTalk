@@ -3,7 +3,7 @@ import { View, Text, ScrollView, Pressable, Dimensions } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useRouter } from 'expo-router';
 import { LinearGradient } from 'expo-linear-gradient';
-import { Star, Moon, Hexagon, Heart, Brain, Sparkles, ChevronRight } from 'lucide-react-native';
+import { Star, Moon, Hexagon, Heart, Brain, Compass, Sparkles, ChevronRight } from 'lucide-react-native';
 import Animated, {
   useSharedValue,
   useAnimatedStyle,
@@ -23,6 +23,7 @@ const iconMap: Record<string, React.ComponentType<{ size: number; color: string 
   Hexagon,
   Heart,
   Brain,
+  Compass,
 };
 
 const AnimatedPressable = Animated.createAnimatedComponent(Pressable);

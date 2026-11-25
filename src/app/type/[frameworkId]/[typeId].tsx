@@ -22,7 +22,9 @@ import Animated, {
   FadeInDown,
   FadeIn,
 } from 'react-native-reanimated';
-import { frameworks } from '@/lib/data';
+import { useFrameworks } from '@/lib/localize';
+import { useT } from '@/lib/i18n';
+import { LanguageSwitch } from '@/components/LanguageSwitch';
 
 const iconMap: Record<string, React.ComponentType<{ size: number; color: string }>> = {
   Star,
@@ -99,6 +101,8 @@ function BulletList({
 
 export default function TypeDetailScreen() {
   const router = useRouter();
+  const t = useT();
+  const frameworks = useFrameworks();
   const { frameworkId, typeId } = useLocalSearchParams<{
     frameworkId: string;
     typeId: string;
@@ -110,7 +114,7 @@ export default function TypeDetailScreen() {
   if (!framework || !type) {
     return (
       <View className="flex-1 bg-slate-900 items-center justify-center">
-        <Text className="text-white">Type not found</Text>
+        <Text className="text-white">{t('typeNotFound')}</Text>
       </View>
     );
   }
@@ -143,11 +147,12 @@ export default function TypeDetailScreen() {
                 {framework.name}
               </Text>
             </View>
+            <LanguageSwitch />
             <View
               className="w-10 h-10 rounded-full items-center justify-center"
               style={{ backgroundColor: `${framework.color}30` }}
             >
-              <Text className="text-lg font-bold" style={{ color: framework.color }}>
+              <Text className="text-lg font-bold" style={{ color: '#f8fafc' }}>
                 {type.symbol || type.name.charAt(0)}
               </Text>
             </View>
@@ -173,7 +178,7 @@ export default function TypeDetailScreen() {
                   <View className="flex-row items-center mb-2">
                     <Sparkles size={18} color={framework.color} />
                     <Text className="text-white font-semibold text-base ml-2">
-                      As a Partner
+                      {t('asPartner')}
                     </Text>
                   </View>
                   <Text className="text-slate-100 text-sm leading-6">
@@ -198,7 +203,7 @@ export default function TypeDetailScreen() {
                   <View className="flex-row items-center mb-2">
                     <Flame size={18} color="#ec4899" />
                     <Text className="text-white font-semibold text-base ml-2">
-                      As a Lover
+                      {t('asLover')}
                     </Text>
                   </View>
                   <Text className="text-slate-100 text-sm leading-6">
@@ -210,7 +215,7 @@ export default function TypeDetailScreen() {
 
             {/* Definition */}
             <DetailSection
-              title="Definition"
+              title={t('definition')}
               icon={Sparkles}
               color={framework.color}
               delay={type.partnershipInsights ? 200 : 100}
@@ -224,7 +229,7 @@ export default function TypeDetailScreen() {
 
             {/* Communication Style */}
             <DetailSection
-              title="Communication Style"
+              title={t('communicationStyle')}
               icon={MessageCircle}
               color={framework.color}
               delay={200}
@@ -238,7 +243,7 @@ export default function TypeDetailScreen() {
 
             {/* Strengths */}
             <DetailSection
-              title="Strengths"
+              title={t('strengths')}
               icon={Star}
               color={framework.color}
               delay={300}
@@ -252,7 +257,7 @@ export default function TypeDetailScreen() {
 
             {/* Challenges */}
             <DetailSection
-              title="Challenges"
+              title={t('challenges')}
               icon={AlertTriangle}
               color="#fca5a5"
               delay={400}
@@ -288,7 +293,7 @@ export default function TypeDetailScreen() {
                   >
                     <Users size={22} color="#ffffff" />
                     <Text className="text-white font-bold text-base ml-3">
-                      Check Compatibility
+                      {t('checkCompat')}
                     </Text>
                   </LinearGradient>
                 </Pressable>

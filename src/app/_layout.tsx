@@ -39,6 +39,7 @@ function RootLayoutNav() {
       >
         <Stack.Screen name="index" />
         <Stack.Screen name="framework/[id]" />
+        <Stack.Screen name="about/[frameworkId]" />
         <Stack.Screen name="type/[frameworkId]/[typeId]" />
         <Stack.Screen name="compatibility/[frameworkId]" />
       </Stack>

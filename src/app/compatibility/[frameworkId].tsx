@@ -27,7 +27,10 @@ import Animated, {
   FadeInDown,
   FadeIn,
 } from 'react-native-reanimated';
-import { frameworks, getGenderedCompatibilityResult } from '@/lib/data';
+import { getGenderedCompatibilityResult } from '@/lib/data';
+import { useFrameworks } from '@/lib/localize';
+import { useLang, useT } from '@/lib/i18n';
+import { LanguageSwitch } from '@/components/LanguageSwitch';
 import { PersonalityType } from '@/lib/types';
 
 const iconMap: Record<string, React.ComponentType<{ size: number; color: string }>> = {
@@ -90,13 +93,13 @@ function TypeSelector({
               >
                 <Text
                   className="text-center font-semibold"
-                  style={{ color: isSelected ? color : '#94a3b8' }}
+                  style={{ color: isSelected ? '#f8fafc' : '#94a3b8' }}
                 >
                   {type.symbol || type.name.charAt(0)}
                 </Text>
                 <Text
-                  className="text-center text-xs mt-1"
-                  style={{ color: isSelected ? '#f8fafc' : '#64748b' }}
+                  className="text-center text-[13px] mt-1"
+                  style={{ color: isSelected ? '#f8fafc' : '#cbd5e1' }}
                   numberOfLines={1}
                 >
                   {type.name.split(' - ')[0]}
@@ -111,6 +114,7 @@ function TypeSelector({
 }
 
 function ScoreRing({ score, color }: { score: number; color: string }) {
+  const t = useT();
   const rotation = React.useRef(0);
 
   const animatedStyle = useAnimatedStyle(() => {
@@ -149,7 +153,7 @@ function ScoreRing({ score, color }: { score: number; color: string }) {
         <Text className="text-4xl font-bold" style={{ color }}>
           {score}
         </Text>
-        <Text className="text-slate-400 text-sm">Compatibility</Text>
+        <Text className="text-slate-300 text-sm">{t('compatibility')}</Text>
       </View>
     </View>
   );
@@ -201,6 +205,9 @@ function InsightSection({
 
 export default function CompatibilityScreen() {
   const router = useRouter();
+  const t = useT();
+  const lang = useLang();
+  const frameworks = useFrameworks();
   const { frameworkId, yourType: initialYourType } = useLocalSearchParams<{
     frameworkId: string;
     yourType?: string;
@@ -213,13 +220,13 @@ export default function CompatibilityScreen() {
 
   const compatibility = useMemo(() => {
     if (!framework || !hisType || !herType) return null;
-    return getGenderedCompatibilityResult(framework, hisType, herType);
-  }, [framework, hisType, herType]);
+    return getGenderedCompatibilityResult(framework, hisType, herType, lang);
+  }, [framework, hisType, herType, lang]);
 
   if (!framework) {
     return (
       <View className="flex-1 bg-slate-900 items-center justify-center">
-        <Text className="text-white">Framework not found</Text>
+        <Text className="text-white">{t('frameworkNotFound')}</Text>
       </View>
     );
   }
@@ -248,12 +255,13 @@ export default function CompatibilityScreen() {
             </Pressable>
             <View className="flex-1">
               <Text className="text-white text-xl font-bold">
-                His & Hers Compatibility
+                {t('compatTitle')}
               </Text>
               <Text className="text-slate-400 text-sm">
                 {framework.name}
               </Text>
             </View>
+            <LanguageSwitch />
             <View
               className="w-10 h-10 rounded-full items-center justify-center"
               style={{ backgroundColor: `${framework.color}30` }}
@@ -274,7 +282,7 @@ export default function CompatibilityScreen() {
             >
               <View className="bg-slate-800/60 rounded-xl p-4 border border-slate-700/50">
                 <Text className="text-slate-300 text-sm leading-5">
-                  Select his type and her type below. Gender affects how personality traits are expressed - the same sign can manifest differently in men and women.
+                  {t('compatIntro')}
                 </Text>
               </View>
             </Animated.View>
@@ -286,16 +294,16 @@ export default function CompatibilityScreen() {
                 selectedType={hisType}
                 onSelect={setHisType}
                 color="#3b82f6"
-                label="Select his type"
-                genderLabel="His"
+                label={t('selectHis')}
+                genderLabel={t('his')}
               />
               <TypeSelector
                 types={framework.types}
                 selectedType={herType}
                 onSelect={setHerType}
                 color="#ec4899"
-                label="Select her type"
-                genderLabel="Hers"
+                label={t('selectHer')}
+                genderLabel={t('hers')}
               />
             </View>
 
@@ -331,7 +339,7 @@ export default function CompatibilityScreen() {
                               hisPersonality.name.charAt(0)}
                           </Text>
                         </View>
-                        <Text className="text-blue-400 text-xs mt-2 font-medium">His</Text>
+                        <Text className="text-blue-400 text-[13px] mt-2 font-semibold">{t('his')}</Text>
                       </View>
                       <View className="mx-4">
                         <Zap size={24} color="#fbbf24" />
@@ -346,7 +354,7 @@ export default function CompatibilityScreen() {
                               herPersonality.name.charAt(0)}
                           </Text>
                         </View>
-                        <Text className="text-pink-400 text-xs mt-2 font-medium">Hers</Text>
+                        <Text className="text-pink-400 text-[13px] mt-2 font-semibold">{t('hers')}</Text>
                       </View>
                     </View>
                     <ScoreRing
@@ -361,7 +369,7 @@ export default function CompatibilityScreen() {
 
                 {/* His Insights */}
                 <InsightSection
-                  title="Understanding Him"
+                  title={t('understandingHim')}
                   icon={User}
                   items={compatibility.hisInsights}
                   iconColor="#3b82f6"
@@ -370,7 +378,7 @@ export default function CompatibilityScreen() {
 
                 {/* Her Insights */}
                 <InsightSection
-                  title="Understanding Her"
+                  title={t('understandingHer')}
                   icon={User}
                   items={compatibility.herInsights}
                   iconColor="#ec4899"
@@ -379,7 +387,7 @@ export default function CompatibilityScreen() {
 
                 {/* Strengths */}
                 <InsightSection
-                  title="Connection Strengths"
+                  title={t('connectionStrengths')}
                   icon={Shield}
                   items={compatibility.strengths}
                   iconColor="#4ade80"
@@ -388,7 +396,7 @@ export default function CompatibilityScreen() {
 
                 {/* Communication Tips */}
                 <InsightSection
-                  title="Communication Tips"
+                  title={t('communicationTips')}
                   icon={MessageCircle}
                   items={compatibility.communicationTips}
                   iconColor={framework.color}
@@ -397,7 +405,7 @@ export default function CompatibilityScreen() {
 
                 {/* As Lovers */}
                 <InsightSection
-                  title="As Lovers"
+                  title={t('asLovers')}
                   icon={Flame}
                   items={compatibility.loverInsights}
                   iconColor="#f472b6"
@@ -406,7 +414,7 @@ export default function CompatibilityScreen() {
 
                 {/* Challenges */}
                 <InsightSection
-                  title="Potential Challenges"
+                  title={t('potentialChallenges')}
                   icon={AlertTriangle}
                   items={compatibility.challenges}
                   iconColor="#fbbf24"
@@ -415,7 +423,7 @@ export default function CompatibilityScreen() {
 
                 {/* Intimacy Insights */}
                 <InsightSection
-                  title="Intimacy Insights"
+                  title={t('intimacyInsights')}
                   icon={Heart}
                   items={compatibility.intimacyInsights}
                   iconColor="#ec4899"
@@ -431,11 +439,11 @@ export default function CompatibilityScreen() {
                     <View className="flex-row items-center mb-2">
                       <Sparkles size={18} color="#fbbf24" />
                       <Text className="text-amber-400 font-semibold ml-2">
-                        Remember
+                        {t('remember')}
                       </Text>
                     </View>
                     <Text className="text-slate-300 text-sm leading-6">
-                      These insights reflect general patterns of how men and women express their personality types. Every individual is unique - use these as a starting point for deeper understanding, not rigid rules.
+                      {t('rememberText')}
                     </Text>
                   </View>
                 </Animated.View>
@@ -464,10 +472,10 @@ export default function CompatibilityScreen() {
                     </View>
                   </View>
                   <Text className="text-white font-semibold text-lg text-center">
-                    Select His & Her Types
+                    {t('selectBoth')}
                   </Text>
-                  <Text className="text-slate-400 text-sm text-center mt-2">
-                    Choose his type (blue) and her type (pink) above to see gender-specific compatibility insights.
+                  <Text className="text-slate-300 text-sm text-center mt-2">
+                    {t('selectBothText')}
                   </Text>
                 </View>
               </Animated.View>

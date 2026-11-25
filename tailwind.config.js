@@ -17,8 +17,8 @@ module.exports = {
       //   secondary: "#INSERT_VALID_HEX_CODE",
       // },
       fontSize: {
-        xs: "10px",
-        sm: "12px",
+        xs: "13px",
+        sm: "14px",
         base: "14px",
         lg: "18px",
         xl: "20px",

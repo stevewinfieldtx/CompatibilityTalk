@@ -34,3 +34,21 @@ export interface CompatibilityResult {
   hisInsights: string[];
   herInsights: string[];
 }
+
+export type Lang = 'en' | 'vi';
+
+export interface TypeTranslation {
+  name: string;
+  description: string;
+  communicationStyle: string;
+  strengths: string[];
+  challenges: string[];
+  partnershipInsights?: string;
+  loverInsights?: string;
+}
+
+export interface FrameworkTranslation {
+  name: string;
+  description: string;
+  types: Record<string, TypeTranslation>;
+}

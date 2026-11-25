@@ -12,6 +12,8 @@ import {
   Brain,
   Compass,
   Check,
+  BookOpen,
+  ChevronRight,
 } from 'lucide-react-native';
 import Animated, {
   useSharedValue,
@@ -20,7 +22,9 @@ import Animated, {
   FadeInDown,
   FadeIn,
 } from 'react-native-reanimated';
-import { frameworks } from '@/lib/data';
+import { useFrameworks } from '@/lib/localize';
+import { useT } from '@/lib/i18n';
+import { LanguageSwitch } from '@/components/LanguageSwitch';
 import { PersonalityType } from '@/lib/types';
 
 const iconMap: Record<string, React.ComponentType<{ size: number; color: string }>> = {
@@ -86,7 +90,7 @@ function TypeCard({
             >
               <Text
                 className="text-lg font-bold"
-                style={{ color: color }}
+                style={{ color: '#f8fafc' }}
               >
                 {type.symbol || type.name.charAt(0)}
               </Text>
@@ -98,7 +102,7 @@ function TypeCard({
               >
                 {type.name}
               </Text>
-              <Text className="text-slate-400 text-xs mt-0.5" numberOfLines={1}>
+              <Text className="text-slate-300 text-[13px] mt-0.5" numberOfLines={1}>
                 {type.strengths.slice(0, 2).join(' • ')}
               </Text>
             </View>
@@ -117,6 +121,8 @@ function TypeCard({
 
 export default function FrameworkScreen() {
   const router = useRouter();
+  const t = useT();
+  const frameworks = useFrameworks();
   const { id } = useLocalSearchParams<{ id: string }>();
 
   const framework = frameworks.find((f) => f.id === id);
@@ -124,7 +130,7 @@ export default function FrameworkScreen() {
   if (!framework) {
     return (
       <View className="flex-1 bg-slate-900 items-center justify-center">
-        <Text className="text-white">Framework not found</Text>
+        <Text className="text-white">{t('frameworkNotFound')}</Text>
       </View>
     );
   }
@@ -154,6 +160,7 @@ export default function FrameworkScreen() {
                 {framework.name}
               </Text>
             </View>
+            <LanguageSwitch />
             <View
               className="w-10 h-10 rounded-full items-center justify-center"
               style={{ backgroundColor: `${framework.color}30` }}
@@ -177,6 +184,25 @@ export default function FrameworkScreen() {
                   {framework.description}
                 </Text>
               </View>
+              <Pressable
+                onPress={() => router.push(`/about/${framework.id}`)}
+                accessibilityRole="button"
+                className="mt-3"
+              >
+                <View
+                  className="flex-row items-center rounded-2xl p-4 border-2"
+                  style={{
+                    borderColor: framework.color,
+                    backgroundColor: `${framework.color}20`,
+                  }}
+                >
+                  <BookOpen size={20} color={framework.color} />
+                  <Text className="text-white font-semibold text-base ml-3 flex-1">
+                    {t('learnAbout', { name: framework.name })}
+                  </Text>
+                  <ChevronRight size={20} color={framework.color} />
+                </View>
+              </Pressable>
             </Animated.View>
 
             {/* Type Selection */}
@@ -185,8 +211,8 @@ export default function FrameworkScreen() {
                 entering={FadeIn.delay(200).duration(400)}
                 className="flex-row items-center justify-between mb-4"
               >
-                <Text className="text-slate-400 text-sm font-medium uppercase tracking-wider">
-                  {framework.types.length} Types
+                <Text className="text-slate-300 text-sm font-semibold uppercase tracking-wider">
+                  {t('typesCount', { n: framework.types.length })}
                 </Text>
               </Animated.View>
 

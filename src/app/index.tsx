@@ -3,7 +3,7 @@ import { View, Text, ScrollView, Pressable, Dimensions } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useRouter } from 'expo-router';
 import { LinearGradient } from 'expo-linear-gradient';
-import { Star, Moon, Hexagon, Heart, Brain, Compass, Sparkles, ChevronRight } from 'lucide-react-native';
+import { Star, Moon, Hexagon, Heart, Brain, Compass, Sparkles, ChevronRight, BookOpen } from 'lucide-react-native';
 import Animated, {
   useSharedValue,
   useAnimatedStyle,
@@ -13,7 +13,10 @@ import Animated, {
   FadeIn,
 } from 'react-native-reanimated';
 import * as SplashScreen from 'expo-splash-screen';
-import { frameworks } from '@/lib/data';
+import { useFrameworks } from '@/lib/localize';
+import { useT } from '@/lib/i18n';
+import { LanguageSwitch } from '@/components/LanguageSwitch';
+import type { Framework } from '@/lib/types';
 
 const { width } = Dimensions.get('window');
 
@@ -32,10 +35,11 @@ function FrameworkCard({
   framework,
   index,
 }: {
-  framework: (typeof frameworks)[0];
+  framework: Framework;
   index: number;
 }) {
   const router = useRouter();
+  const t = useT();
   const scale = useSharedValue(1);
 
   const Icon = iconMap[framework.icon] || Star;
@@ -79,11 +83,24 @@ function FrameworkCard({
             <ChevronRight size={20} color="#ffffff" />
           </View>
         </View>
-        <View className="mt-4">
-          <Text className="text-white text-xl font-bold">{framework.name}</Text>
-          <Text className="text-white/80 text-sm mt-1" numberOfLines={2}>
-            {framework.types.length} types to explore
-          </Text>
+        <View className="mt-4 flex-row items-end justify-between">
+          <View className="flex-1 mr-3">
+            <Text className="text-white text-xl font-bold">{framework.name}</Text>
+            <Text className="text-white text-sm mt-1" numberOfLines={2}>
+              {t('typesToExplore', { n: framework.types.length })}
+            </Text>
+          </View>
+          <Pressable
+            onPress={() => router.push(`/about/${framework.id}`)}
+            accessibilityRole="button"
+            accessibilityLabel={`${t('whatIsIt')} ${framework.name}`}
+            className="flex-row items-center bg-black/35 rounded-full px-4 py-2.5"
+          >
+            <BookOpen size={16} color="#ffffff" />
+            <Text className="text-white text-sm font-semibold ml-2">
+              {t('whatIsIt')}
+            </Text>
+          </Pressable>
         </View>
       </LinearGradient>
     </AnimatedPressable>
@@ -92,6 +109,8 @@ function FrameworkCard({
 
 export default function HomeScreen() {
   const router = useRouter();
+  const t = useT();
+  const frameworks = useFrameworks();
 
   useEffect(() => {
     SplashScreen.hideAsync();
@@ -114,19 +133,22 @@ export default function HomeScreen() {
               entering={FadeIn.delay(100).duration(600)}
               className="px-6 pt-6 pb-4"
             >
-              <View className="flex-row items-center mb-2">
-                <View className="bg-amber-400/20 rounded-full p-2 mr-2">
-                  <Sparkles size={20} color="#fbbf24" />
+              <View className="flex-row items-center justify-between mb-2">
+                <View className="flex-row items-center flex-1">
+                  <View className="bg-amber-400/20 rounded-full p-2 mr-2">
+                    <Sparkles size={20} color="#fbbf24" />
+                  </View>
+                  <Text className="text-amber-400 text-sm font-semibold">
+                    {t('appName')}
+                  </Text>
                 </View>
-                <Text className="text-amber-400 text-sm font-medium">
-                  Connection Guide
-                </Text>
+                <LanguageSwitch />
               </View>
               <Text className="text-white text-3xl font-bold">
-                Understand & Connect
+                {t('homeTitle')}
               </Text>
-              <Text className="text-slate-400 text-base mt-2 leading-6">
-                Discover how personality frameworks can help you communicate better and build deeper relationships.
+              <Text className="text-slate-300 text-base mt-2 leading-6">
+                {t('homeSubtitle')}
               </Text>
             </Animated.View>
 
@@ -142,9 +164,9 @@ export default function HomeScreen() {
             <View className="px-6 mt-4">
               <Animated.Text
                 entering={FadeIn.delay(300).duration(500)}
-                className="text-slate-400 text-sm font-medium uppercase tracking-wider mb-4"
+                className="text-slate-300 text-sm font-semibold uppercase tracking-wider mb-4"
               >
-                Choose a Framework
+                {t('chooseFramework')}
               </Animated.Text>
               {frameworks.map((framework, index) => (
                 <FrameworkCard
@@ -162,9 +184,7 @@ export default function HomeScreen() {
             >
               <View className="bg-slate-800/50 rounded-2xl p-5 border border-slate-700/50">
                 <Text className="text-slate-300 text-sm leading-5">
-                  Each framework offers unique insights into how people think,
-                  communicate, and connect. Tap any card to explore definitions,
-                  communication tips, and compatibility insights.
+                  {t('homeInfo')}
                 </Text>
               </View>
             </Animated.View>

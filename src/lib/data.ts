@@ -1,4 +1,5 @@
-import { Framework, CompatibilityResult } from './types';
+import { Framework, CompatibilityResult, Lang } from './types';
+import { buildGenderedResultVi } from './compat-vi';
 
 export const frameworks: Framework[] = [
   {
@@ -266,7 +267,7 @@ export const frameworks: Framework[] = [
     name: 'Enneagram',
     icon: 'Hexagon',
     color: '#06b6d4',
-    gradient: ['#0891b2', '#0e7490'],
+    gradient: ['#0e7490', '#155e75'],
     description: 'A system of nine interconnected personality types that describes patterns in how people interpret the world and manage their emotions.',
     types: [
       {
@@ -422,7 +423,7 @@ export const frameworks: Framework[] = [
     name: 'MBTI',
     icon: 'Brain',
     color: '#f59e0b',
-    gradient: ['#d97706', '#b45309'],
+    gradient: ['#b45309', '#92400e'],
     description: 'The Myers-Briggs Type Indicator identifies 16 personality types based on preferences in four dimensions: energy, information, decisions, and lifestyle.',
     types: [
       {
@@ -793,7 +794,8 @@ export function getCompatibilityResult(
 export function getGenderedCompatibilityResult(
   framework: Framework,
   hisType: string,
-  herType: string
+  herType: string,
+  lang: Lang = 'en'
 ): CompatibilityResult {
   const hisPersonality = framework.types.find(t => t.id === hisType);
   const herPersonality = framework.types.find(t => t.id === herType);
@@ -822,6 +824,10 @@ export function getGenderedCompatibilityResult(
   const score = 60 + Math.abs(hash % 35);
 
   const isSameType = hisType === herType;
+
+  if (lang === 'vi') {
+    return buildGenderedResultVi(framework, hisPersonality, herPersonality, score, isSameType);
+  }
 
   // His-specific insights (how he expresses this type)
   const hisInsights = isSameType
